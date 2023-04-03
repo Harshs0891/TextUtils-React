@@ -129,6 +129,8 @@ export default function TextForm(props) {
       <h2>Preview</h2>
       <p>{text.length>0?text:"Enter something to preview it here"}</p>
     </div>
+    
+    <footer style={{color : props.mode=== 'light' ? 'black' : 'white',marginLeft:"50%",fontWeight:"900"}}>Created By Harsh</footer>
     </>
   )
 }
