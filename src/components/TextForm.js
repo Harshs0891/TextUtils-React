@@ -78,6 +78,7 @@ export default function TextForm(props) {
     const handleCopy = () =>{
       var texts = document.getElementById("myBox")
       texts.select();
+      document.getSelection().removeAllRanges();
       navigator.clipboard.writeText(texts.value);
     }
 
@@ -103,18 +104,18 @@ export default function TextForm(props) {
     <div className="container">
         <h1 style={{color : props.mode=== 'light' ? 'black' : 'red'}}>{props.heading} </h1>
         <div className="mb-3">
-        <textarea value={text} className="form-control" onChange={handleOnChange} style={{backgroundColor : props.mode==='dark' ? 'grey' : 'white' , color: props.mode=== 'light' ? 'black' : 'white'}} id="myBox" rows="8"></textarea>
+        <textarea value={text} className="form-control" onChange={handleOnChange} style={{backgroundColor : props.mode==='dark' ? '#13466e' : 'white' , color: props.mode=== 'light' ? 'black' : 'white'}} id="myBox" rows="8"></textarea>
         </div>
-        <button className="btn btn-primary mx-2 my-2"  onClick={handleUpClick}>Convert To UpperCase</button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleLowClick}>Convert To LowerCase</button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleClearClick}>Clear Text</button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleRevWorClick}>Reverse Words</button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleRevCharClick}>Reverse Characters</button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handlePTextClick}>Change Preview TextColor</button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleCapClick}>Capitalise</button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleIncClick}>Increase Font size </button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleDectClick}>Decrease Font Size</button>
-        <button className="btn btn-primary mx-2 my-2" onClick={handleCopy}>Copy Text</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2"  onClick={handleUpClick}>Convert To UpperCase</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleLowClick}>Convert To LowerCase</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleClearClick}>Clear Text</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleRevWorClick}>Reverse Words</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleRevCharClick}>Reverse Characters</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handlePTextClick}>Change Preview TextColor</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleCapClick}>Capitalise</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleIncClick}>Increase Font size </button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleDectClick}>Decrease Font Size</button>
+        <button disabled={text.length===0} className="btn btn-primary mx-2 my-2" onClick={handleCopy}>Copy Text</button>
         <h4 style={{color : props.mode=== 'light' ? 'black' : 'white'}}>Find and Delete Word</h4>
         <textarea className="my-2 mx-2" value={Find} id="" cols="16" onChange={handleOnChangeFind} rows="1"></textarea>
         <button className="btn btn-primary mx-2" onClick={handleFindClick}>Delete the word</button>
@@ -123,11 +124,11 @@ export default function TextForm(props) {
 
     <div className="container my-3" style={{color : props.mode=== 'light' ? 'black' : 'white'}}>
       <h2>Your summary</h2>
-      <p>{text.split(/[  ]+/).length} words and {text.length} characters </p>
-      <p>{0.008 * text.split(" ").length} minutes to read</p>
+      <p>{text.split(" ").filter((element)=>{ return element.length !== 0 }).length} words and {text.length} characters </p>
+      <p>{0.008 * text.split(" ").filter((element)=>{ return element.length !== 0 }).length} minutes to read</p>
       {/* <p>{text.search({Find})}</p> */}
       <h2>Preview</h2>
-      <p>{text.length>0?text:"Enter something to preview it here"}</p>
+      <p>{text.length>0?text:"Nothing To Preview Here"}</p>
     </div>
     
     <footer style={{color : props.mode=== 'light' ? 'black' : 'white',marginLeft:"50%",fontWeight:"900"}}>Created By Harsh</footer>
